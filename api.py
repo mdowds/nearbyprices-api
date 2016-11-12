@@ -1,13 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_restful import Resource, Api
 from jsonfromfile import JsonFromFile
 
 app = Flask(__name__)
 api = Api(app)
 
-class Hello(Resource):
-    def get(self):
-        return("Hello world")
 
 class Prices(Resource):
 
@@ -28,17 +25,19 @@ class Prices(Resource):
         "required": ["areaName","averagePrice","outcode","transactionCount"]
     }
 
+    defaultdir = "data/"
+
     def get(self, outcode):
-        jsonData = JsonFromFile("data/", self.schema)
+
+        jsonData = JsonFromFile(self.defaultdir, self.schema)
 
         data = jsonData.getData(outcode.lower())
 
         if(data == None):
-            return jsonify({ "error": "An error occured: no valid data returned"})
+            return { "error": "An error occured: no valid data returned"}, 500
 
-        return jsonify(data)
+        return data
 
-api.add_resource(Hello, '/')
 api.add_resource(Prices, '/prices/<string:outcode>')
 
 if __name__ == '__main__':

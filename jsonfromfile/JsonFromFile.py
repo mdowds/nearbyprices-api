@@ -2,6 +2,7 @@ import json
 import jsonschema
 from jsonschema import validate
 
+
 class JsonFromFile():
 
     def __init__(self, rootPath, schema):
