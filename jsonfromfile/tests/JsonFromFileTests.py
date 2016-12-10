@@ -1,7 +1,7 @@
 import unittest
 import json
 import os
-from jsonfromfile import JsonFromFile
+from jsonfromfile import JsonFromFile, JsonFromFileError
 
 
 class JsonFromFileTests(unittest.TestCase):
@@ -25,30 +25,30 @@ class JsonFromFileTests(unittest.TestCase):
         self.assertIsNotNone(pricesData)
 
     def test_init_SetsRootDataPath(self):
-        self.assertEqual(self.jsonData.rootDataPath, self.root)
+        self.assertEqual(self.jsonData.data_path, self.root)
 
     def test_init_SetsSchema(self):
         self.assertEqual(self.jsonData.schema, self.schema)
 
-    def test_getData_WithValidFilename_ReturnsCorrectData(self):
+    def test_get_data_WithValidFilename_ReturnsCorrectData(self):
         dataFile = open(self.root + "test.json").read()
         expectedData = json.loads(dataFile)
 
-        actualData = self.jsonData.getData("test")
+        actualData = self.jsonData.get_data("test")
 
         self.assertEqual(actualData, expectedData)
 
-    def test_getData_WithInvalidFilename_ReturnsNone(self):
-        self.assertIsNone(self.jsonData.getData("void"))
+    def test_get_data_WithInvalidFilename_Throws(self):
+        self.assertRaises(JsonFromFileError, self.jsonData.get_data, "void")
 
-    def test_getData_WithInvalidJson_ReturnsNone(self):
-        self.assertIsNone(self.jsonData.getData("invalid"))
+    def test_get_data_WithInvalidJson_ReturnsNone(self):
+        self.assertRaises(JsonFromFileError, self.jsonData.get_data, "invalid")
 
-    def test_getData_WithEmptyJson_ReturnsNone(self):
-        self.assertIsNone(self.jsonData.getData("empty"))
+    def test_get_data_WithEmptyJson_ReturnsNone(self):
+        self.assertRaises(JsonFromFileError, self.jsonData.get_data, "empty")
 
-    def test_getData_WithNoncompliantJson_ReturnsNone(self):
-        self.assertIsNone(self.jsonData.getData("noncompliant"))
+    def test_get_data_WithNoncompliantJson_ReturnsNone(self):
+        self.assertRaises(JsonFromFileError, self.jsonData.get_data, "noncompliant")
 
 
 if __name__ == '__main__':

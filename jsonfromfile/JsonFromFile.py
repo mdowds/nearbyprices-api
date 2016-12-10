@@ -4,29 +4,30 @@ import jsonschema
 from jsonschema import validate
 
 
+class JsonFromFileError(Exception):
+    pass
+
+
 class JsonFromFile():
 
-    def __init__(self, rootPath, schema):
-        self.rootDataPath = os.path.join(os.path.dirname(__file__), '..', rootPath)
+    def __init__(self, root_path, schema):
+        self.data_path = os.path.join(os.path.dirname(__file__), '..', root_path)
         self.schema = schema
 
-    def getData(self, name):
+    def get_data(self, name):
         try:
-            dataFile = open(self.rootDataPath + name + ".json")
+            data_file = open(self.data_path + name + ".json")
         except FileNotFoundError:
-            print("FileNotFoundError")
-            return None
+            raise JsonFromFileError("File not found")
 
         try:
-            jsonData = json.loads(dataFile.read())
+            json_data = json.loads(data_file.read())
         except json.decoder.JSONDecodeError:
-            print("JSONDecodeError")
-            return None
+            raise JsonFromFileError("Error decoding JSON file")
 
         try:
-            validate(jsonData, self.schema)
+            validate(json_data, self.schema)
         except jsonschema.exceptions.ValidationError:
-            print("ValidationError")
-            return None
+            raise JsonFromFileError("Error validating JSON file")
 
-        return jsonData
+        return json_data

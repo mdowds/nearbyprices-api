@@ -1,1 +1,1 @@
-from jsonfromfile.JsonFromFile import JsonFromFile
+from jsonfromfile.JsonFromFile import JsonFromFile, JsonFromFileError
