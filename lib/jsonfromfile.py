@@ -16,17 +16,17 @@ class JsonFromFile():
     def get_data(self, name):
         try:
             data_file = open(self.path + name + ".json")
-        except FileNotFoundError:
-            raise JsonFromFileError("File not found")
+        except FileNotFoundError as err:
+            raise JsonFromFileError("File not found") from err
 
         try:
             json_data = json.loads(data_file.read())
-        except json.decoder.JSONDecodeError:
-            raise JsonFromFileError("Error decoding JSON file")
+        except json.decoder.JSONDecodeError as err:
+            raise JsonFromFileError("Error decoding JSON file") from err
 
         try:
             validate(json_data, self.schema)
-        except jsonschema.exceptions.ValidationError:
-            raise JsonFromFileError("Error validating JSON file")
+        except jsonschema.exceptions.ValidationError as err:
+            raise JsonFromFileError("Error validating JSON file") from err
 
         return json_data

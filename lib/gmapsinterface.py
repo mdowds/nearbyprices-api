@@ -16,20 +16,17 @@ class GMapsInterface:
         response = requests.get("https://maps.googleapis.com/maps/api/geocode/json", params)
 
         try:
-            data = json.loads(response)
+            data = json.loads(response.text)
         except:
             raise GMapsInterfaceError("Error decoding JSON file")
-            return
 
         if data["status"] != "OK":
             raise GMapsInterfaceError("GMaps did not return valid response")
-            return
 
         try:
             address_components = data["results"][0]["address_components"]
         except KeyError:
             raise GMapsInterfaceError("GMaps did not return valid response")
-            return
 
         outcode = ""
 
@@ -41,7 +38,6 @@ class GMapsInterface:
 
         if outcode == "":
             raise GMapsInterfaceError("No outcode found")
-            return
 
         return outcode
 
