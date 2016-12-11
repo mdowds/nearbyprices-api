@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_restful import Resource, Api, abort
-from jsonfromfile import JsonFromFile, JsonFromFileError
+from lib.jsonfromfile import JsonFromFile, JsonFromFileError
 from webargs import fields, ValidationError
 from webargs.flaskparser import use_kwargs, parser
+import os.path
 
 app = Flask(__name__)
 api = Api(app)
@@ -32,10 +33,10 @@ class PricesFromOutcode(Resource):
         "required": ["areaName","averagePrice","outcode","transactionCount"]
     }
 
-    defaultdir = "data/"
+    data_path = os.path.join(os.path.dirname(__file__), "data/")
 
     def get(self, outcode):
-        json_data = JsonFromFile(self.defaultdir, self.schema)
+        json_data = JsonFromFile(self.data_path, self.schema)
 
         try:
             data = json_data.get_data(outcode.lower())

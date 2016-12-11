@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from api import PricesFromOutcode
-from jsonfromfile import JsonFromFileError
+from lib.jsonfromfile import JsonFromFileError
 
 
 class PricesFromPositionTests(unittest.TestCase):

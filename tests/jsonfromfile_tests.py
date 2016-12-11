@@ -1,7 +1,7 @@
 import unittest
 import json
-import os
-from jsonfromfile import JsonFromFile, JsonFromFileError
+import os.path
+from lib.jsonfromfile import JsonFromFile, JsonFromFileError
 
 
 class JsonFromFileTests(unittest.TestCase):
@@ -25,7 +25,7 @@ class JsonFromFileTests(unittest.TestCase):
         self.assertIsNotNone(pricesData)
 
     def test_init_SetsRootDataPath(self):
-        self.assertEqual(self.jsonData.data_path, self.root)
+        self.assertEqual(self.jsonData.path, self.root)
 
     def test_init_SetsSchema(self):
         self.assertEqual(self.jsonData.schema, self.schema)

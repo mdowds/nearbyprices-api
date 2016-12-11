@@ -1,5 +1,4 @@
 import json
-import os.path
 import jsonschema
 from jsonschema import validate
 
@@ -10,13 +9,13 @@ class JsonFromFileError(Exception):
 
 class JsonFromFile():
 
-    def __init__(self, root_path, schema):
-        self.data_path = os.path.join(os.path.dirname(__file__), '..', root_path)
+    def __init__(self, path, schema):
+        self.path = path
         self.schema = schema
 
     def get_data(self, name):
         try:
-            data_file = open(self.data_path + name + ".json")
+            data_file = open(self.path + name + ".json")
         except FileNotFoundError:
             raise JsonFromFileError("File not found")
 
