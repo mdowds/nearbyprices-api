@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 import json
 import os.path
-from datasource.pricesdatasource import PricesDataSource
+from datasource.pricesdatasource import PricesDataSource, PricesDataSourceError, LandRegistryInterfaceError
 
 
 class PricesDataSourceTests(unittest.TestCase):
@@ -14,6 +14,9 @@ class PricesDataSourceTests(unittest.TestCase):
 
     def setUp(self):
         self.pds = PricesDataSource("WC2N")
+
+    def tearDown(self):
+        self.pds.error = None
 
     @patch("datasource.pricesdatasource.LandRegistryInterface")
     @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
@@ -40,9 +43,9 @@ class PricesDataSourceTests(unittest.TestCase):
         mock_lri.run_query.side_effect = self.mock_runquery
 
         self.pds.run_query()
-        self.assertEqual(self.pds.area_name, "London")
-        self.assertEqual(self.pds.average_price, 500000)
-        self.assertEqual(self.pds.transaction_count, 1000)
+        self.assertEqual(self.pds.output['areaName'], "London")
+        self.assertEqual(self.pds.output['averagePrice'], 500000)
+        self.assertEqual(self.pds.output['transactionCount'], 1000)
 
     @patch("datasource.pricesdatasource.LandRegistryInterface")
     @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
@@ -54,14 +57,40 @@ class PricesDataSourceTests(unittest.TestCase):
 
         self.pds.run_query()
 
-        self.assertEqual(self.pds.detached_average, 300000)
-        self.assertEqual(self.pds.semi_detached_average, 205000)
-        self.assertEqual(self.pds.terraced_average, 200000)
-        self.assertEqual(self.pds.flat_average, 135000)
+        self.assertEqual(self.pds.output['detachedAverage'], 300000)
+        self.assertEqual(self.pds.output['semiDetachedAverage'], 205000)
+        self.assertEqual(self.pds.output['terracedAverage'], 200000)
+        self.assertEqual(self.pds.output['flatAverage'], 135000)
 
-    # @patch("datasource.pricesdatasource.LandRegistryInterface")
-    # @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
-    # def test_runQuery_withErrorInResponse_Raises(self, mock_factory, mock_lri):
+    @patch("datasource.pricesdatasource.LandRegistryInterface")
+    @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
+    def test_runQuery_withEmptyResponse_SetsError(self, mock_factory, mock_lri):
+        mock_lri.run_query.return_value = {"results": {"bindings": []}}
+        self.pds.run_query()
+        self.assertEqual(self.pds.error, "No results found")
+
+    @patch("datasource.pricesdatasource.LandRegistryInterface")
+    @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
+    def test_runQuery_whenLRIRaises_SetsError(self, mock_factory, mock_lri):
+        mock_lri.run_query.side_effect = LandRegistryInterfaceError("LRI error")
+        self.pds.run_query()
+        self.assertEqual(self.pds.error, "LRI error")
+
+    @patch("datasource.pricesdatasource.LandRegistryInterface")
+    @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
+    def test_runQuery_withErrorResponse_SetsError(self, mock_factory, mock_lri):
+        mock_lri.run_query.return_value = "Error 400: Parse error etc."
+        self.pds.run_query()
+        self.assertEqual(self.pds.error, "Error in query")
+
+    def test_getResultsDictionary_ReturnsResults(self):
+        expected = { "results": "data" }
+        self.pds.output = expected
+        self.assertEqual(self.pds.get_results_dictionary(), expected)
+
+    def test_getResultsDictionary_WithErrorSet_Raises(self):
+        self.pds.error = "Error"
+        self.assertRaises(PricesDataSourceError, self.pds.get_results_dictionary)
 
     # Helper methods
 
