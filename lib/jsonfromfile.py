@@ -1,6 +1,6 @@
 import json
-import jsonschema
 from jsonschema import validate
+from jsonschema.exceptions import ValidationError
 
 
 class JsonFromFileError(Exception):
@@ -26,7 +26,7 @@ class JsonFromFile():
 
         try:
             validate(json_data, self.schema)
-        except jsonschema.exceptions.ValidationError as err:
+        except ValidationError as err:
             raise JsonFromFileError("Error validating JSON file") from err
 
         return json_data

@@ -100,6 +100,12 @@ class PricesDataSource:
             self.error = "No results found"
             return True
 
+        transaction_count = int(results[self.RESULTS_KEY][self.BINDINGS_KEY][0][self.TRANSACTIONCOUNT_KEY][self.VALUE_KEY])
+
+        if transaction_count == 0:
+            self.error = "No transactions for outcode"
+            return True
+
         return False
 
 

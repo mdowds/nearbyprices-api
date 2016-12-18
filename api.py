@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Resource, Api, abort
+from flask_restful.utils import cors
 from webargs import fields, ValidationError
 from webargs.flaskparser import use_kwargs, parser
 from lib.gmapsinterface import GMapsInterface, GMapsInterfaceError
@@ -16,6 +17,7 @@ MINIMUM_LONGITUDE = -8.45
 
 class outcode(Resource):
 
+    @cors.crossdomain(origin='*')
     def get(self, outcode):
         pfo = PricesFromOutcode()
 
@@ -25,7 +27,7 @@ class outcode(Resource):
             abort(400, errors=str(err))
             return
 
-        return data
+        return jsonify(data)
 
 
 class position(Resource):
@@ -49,6 +51,7 @@ class position(Resource):
         )
     }
 
+    @cors.crossdomain(origin='*')
     @use_kwargs(args)
     def get(self, lat, long):
         maps = GMapsInterface()
@@ -67,7 +70,7 @@ class position(Resource):
             abort(400, errors=str(err))
             return
 
-        return data
+        return jsonify(data)
 
 api.add_resource(outcode, '/prices/outcode/<string:outcode>')
 api.add_resource(position, '/prices/position')
@@ -78,4 +81,4 @@ def handle_request_parsing_error(err):
     abort(400, errors=err.messages)
 
 if __name__ == '__main__':
-     app.run()
+     app.run(debug=True)

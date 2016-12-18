@@ -10,7 +10,6 @@ class PricesDataSourceTests(unittest.TestCase):
     PATH = os.path.dirname(__file__)
     MAIN_QUERY = "main"
     TYPE_QUERY = "type"
-    CHANGE_QUERY = "change"
 
     def setUp(self):
         self.pds = PricesDataSource("WC2N")
@@ -39,7 +38,6 @@ class PricesDataSourceTests(unittest.TestCase):
     def test_runQuery_setsCorrectReturnValues(self, mock_factory, mock_lri):
         mock_factory.main_query.return_value = self.MAIN_QUERY
         mock_factory.type_query.return_value = self.TYPE_QUERY
-        mock_factory.change_query.return_value = self.CHANGE_QUERY
         mock_lri.run_query.side_effect = self.mock_runquery
 
         self.pds.run_query()
@@ -52,7 +50,6 @@ class PricesDataSourceTests(unittest.TestCase):
     def test_runQuery_setsCorrectTypeAverages(self, mock_factory, mock_lri):
         mock_factory.main_query.return_value = self.MAIN_QUERY
         mock_factory.type_query.return_value = self.TYPE_QUERY
-        mock_factory.change_query.return_value = self.CHANGE_QUERY
         mock_lri.run_query.side_effect = self.mock_runquery
 
         self.pds.run_query()
@@ -61,6 +58,15 @@ class PricesDataSourceTests(unittest.TestCase):
         self.assertEqual(self.pds.output['semiDetachedAverage'], 205000)
         self.assertEqual(self.pds.output['terracedAverage'], 200000)
         self.assertEqual(self.pds.output['flatAverage'], 135000)
+
+
+    @patch("datasource.pricesdatasource.LandRegistryInterface")
+    @patch("datasource.pricesdatasource.LandRegistryInterface")
+    def test_runQuery_WithNoTransactionsReturned_SetsError(self, mock_factory, mock_lri):
+        mock_lri.run_query.return_value = {"results": {"bindings": [{"transactionCount": {"value": "0"}}]}}
+
+        self.pds.run_query()
+        self.assertEqual(self.pds.error, "No transactions for outcode")
 
     @patch("datasource.pricesdatasource.LandRegistryInterface")
     @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
