@@ -1,0 +1,30 @@
+{"results":
+  {"bindings": [
+    {
+      "transactionCount": {"value": "250", "datatype": "http://www.w3.org/2001/XMLSchema#integer", "type": "typed-literal"},
+      "averagePrice": {"value": "200000.418604651162790697674418", "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "typed-literal"},
+      "ppd_propertyType": {"value": "http://landregistry.data.gov.uk/def/common/terraced", "type": "uri"}
+    },
+    {
+      "transactionCount": {"value": "131", "datatype": "http://www.w3.org/2001/XMLSchema#integer", "type": "typed-literal"},
+      "averagePrice": {"value": "300000.83969465648854961832061", "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "typed-literal"},
+      "ppd_propertyType": {"value": "http://landregistry.data.gov.uk/def/common/detached", "type": "uri"}
+    },
+    {
+      "transactionCount": {"value": "141", "datatype": "http://www.w3.org/2001/XMLSchema#integer", "type": "typed-literal"},
+      "averagePrice": {"value": "205000.099290780141843971631205", "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "typed-literal"},
+      "ppd_propertyType": {"value": "http://landregistry.data.gov.uk/def/common/semi-detached", "type": "uri"}
+    },
+    {
+      "transactionCount": {"value": "135", "datatype": "http://www.w3.org/2001/XMLSchema#integer", "type": "typed-literal"},
+      "averagePrice": {"value": "135000.814814814814814814814814", "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "typed-literal"},
+      "ppd_propertyType": {"value": "http://landregistry.data.gov.uk/def/common/flat-maisonette", "type": "uri"}
+    },
+    {
+      "transactionCount": {"value": "7", "datatype": "http://www.w3.org/2001/XMLSchema#integer", "type": "typed-literal"},
+      "averagePrice": {"value": "180000.0", "datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "typed-literal"},
+      "ppd_propertyType": {"value": "http://landregistry.data.gov.uk/def/common/otherPropertyType", "type": "uri"}
+    }
+  ]},
+  "head": {"vars": ["averagePrice", "transactionCount", "ppd_propertyType"]}
+}

@@ -6,39 +6,28 @@ from datasource.landregistryquery import LandRegistryQuery
 
 class LandRegistryInterfaceTests(unittest.TestCase):
 
+    QUERY_STRING = "Query"
+
     @patch("datasource.landregistryinterface.SPARQLWrapper")
     def test_runQuery_callsSparqlSetQuery_WithQueryString(self, mock_sparql):
-        lrq = LandRegistryQuery("WC2N")
-        query_string = lrq.get_querystring()
-        lri = LandRegistryInterface(query_string)
-        lri.run_query()
-
-        mock_sparql.return_value.setQuery.assert_called_once_with(query_string)
+        LandRegistryInterface.run_query(self.QUERY_STRING)
+        mock_sparql.return_value.setQuery.assert_called_once_with(self.QUERY_STRING)
 
     @patch("datasource.landregistryinterface.SPARQLWrapper")
     def test_runQuery_callsSparqlQueryAndConvert(self, mock_sparql):
-        lrq = LandRegistryQuery("WC2N")
-        query_string = lrq.get_querystring()
-        lri = LandRegistryInterface(query_string)
-        lri.run_query()
-
+        LandRegistryInterface.run_query(self.QUERY_STRING)
         self.assertTrue(mock_sparql.return_value.queryAndConvert.called)
 
     @patch("datasource.landregistryinterface.SPARQLWrapper")
     def test_runQuery_ReturnsCorrectResponse(self, mock_sparql):
-        lrq = LandRegistryQuery("WC2N")
-        queryString = lrq.get_querystring()
-        lri = LandRegistryInterface(queryString)
-
         expected = {"response":"response"}
         mock_sparql.return_value.queryAndConvert.return_value = expected
-        actual = lri.run_query()
+        actual = LandRegistryInterface.run_query(self.QUERY_STRING)
 
         self.assertEqual(actual, expected)
 
     def testRunQuery_WithEmptyQuery_Raises(self):
-        lrq = LandRegistryQuery("")
-        query_string = lrq.get_querystring()
-        lri = LandRegistryInterface(query_string)
+        self.assertRaises(LandRegistryInterfaceError, LandRegistryInterface.run_query, "")
 
-        self.assertRaises(LandRegistryInterfaceError, lri.run_query)
+    def testRunQuery_WithNonStringQuery_Raises(self):
+        self.assertRaises(LandRegistryInterfaceError, LandRegistryInterface.run_query, 12)

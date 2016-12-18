@@ -2,13 +2,16 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 class LandRegistryInterface:
-    def __init__(self, query_string):
-        self.query = query_string
 
-    def run_query(self):
+    @staticmethod
+    def run_query(query_string):
+
+        if type(query_string) != str or len(query_string) == 0:
+            raise LandRegistryInterfaceError("Invalid query")
+
         sparql = SPARQLWrapper("http://landregistry.data.gov.uk/landregistry/query")
         sparql.setReturnFormat(JSON)
-        sparql.setQuery(self.query)
+        sparql.setQuery(query_string)
 
         try:
             results = sparql.queryAndConvert()
