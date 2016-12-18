@@ -50,23 +50,3 @@ class LandRegistryQueryFactoryTests(unittest.TestCase):
         query = LandRegistryQueryFactory.main_query("WC2N")
 
         self.assertEqual(query, "Type query")
-
-    @patch("datasource.landregistryqueryfactory.LandRegistryQuery")
-    def test_changeQuery_callsLRQuery(self, mock_lrq):
-        LandRegistryQueryFactory.change_query("WC2N")
-        lrq_obj = mock_lrq.return_value
-
-        # Base query calls
-        mock_lrq.assert_called_once_with("WC2N")
-        self.assertTrue(lrq_obj.add_averageprice.called)
-        self.assertTrue(lrq_obj.add_transactioncount.called)
-
-        # Change query calls
-        lrq_obj.add_year_range.assert_called_once_with(2, 1)
-
-    @patch("datasource.landregistryqueryfactory.LandRegistryQuery")
-    def test_changeQuery_returnsCorrectQuery(self, mock_lrq):
-        mock_lrq.return_value.get_querystring.return_value = "Change query"
-        query = LandRegistryQueryFactory.main_query("WC2N")
-
-        self.assertEqual(query, "Change query")

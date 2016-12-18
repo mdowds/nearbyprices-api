@@ -29,13 +29,6 @@ class LandRegistryQueryFactory:
 
         return query.get_querystring()
 
-    @classmethod
-    def change_query(cls, outcode):
-        query = cls.base_query(outcode)
-        query.add_year_range(cls.PAST_YEAR_MAX, cls.PAST_YEAR_MIN)
-
-        return query.get_querystring()
-
     # Helper methods
 
     @classmethod

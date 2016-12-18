@@ -11,8 +11,6 @@ class PricesFromOutcode:
             "detachedAverage": {"type": "number"},
             "flatAverage": {"type": "number"},
             "outcode": {"type": "string"},
-            "pastAveragePrice": {"type": "number"},
-            "priceChange": {"type": "number"},
             "semiDetachedAverage": {"type": "number"},
             "terracedAverage": {"type": "number"},
             "transactionCount": {"type": "number"}

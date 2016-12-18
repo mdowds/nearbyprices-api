@@ -32,14 +32,6 @@ class PricesDataSourceTests(unittest.TestCase):
         mock_lri.run_query.assert_any_call(self.TYPE_QUERY)
 
     @patch("datasource.pricesdatasource.LandRegistryInterface")
-    @patch("datasource.pricesdatasource.LandRegistryQueryFactory")
-    def test_runQuery_callsLRInterface_WithChangeQuery(self, mock_factory, mock_lri):
-        mock_factory.change_query.return_value = self.CHANGE_QUERY
-        self.pds.run_query()
-
-        mock_lri.run_query.assert_any_call(self.CHANGE_QUERY)
-
-    @patch("datasource.pricesdatasource.LandRegistryInterface")
     @patch("datasource.pricesdatasource.LandRegistryInterface")
     def test_runQuery_setsCorrectReturnValues(self, mock_factory, mock_lri):
         mock_factory.main_query.return_value = self.MAIN_QUERY
