@@ -38,7 +38,7 @@ class position(Resource):
 
     def validate_longitude(val):
         if not MAXIMUM_LONGITUDE >= val >= MINIMUM_LONGITUDE:
-            raise ValidationError('Invalid latitude')
+            raise ValidationError('Invalid longitude')
 
     args = {
         'lat': fields.Float(
