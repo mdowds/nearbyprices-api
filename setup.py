@@ -15,7 +15,7 @@ for outcode in outcodes_array:
 
     try:
         results = datasource.get_results_dictionary()
-        output_file = open(path + '/data/' + outcode.lower() + '.json', 'w')
+        output_file = open(path + 'data/' + outcode.lower() + '.json', 'w')
         json.dump(results, output_file, sort_keys=True)
         print("File " + output_file.name + " created and written to")
         record_count += 1
