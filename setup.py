@@ -3,7 +3,7 @@ import json
 from datasource.pricesdatasource import PricesDataSource, PricesDataSourceError
 
 path = os.path.dirname(__file__)
-outcodes_file = open(path + '/outcodes.json')
+outcodes_file = open(path + 'outcodes.json')
 outcodes_array = json.load(outcodes_file)
 
 record_count = 0
