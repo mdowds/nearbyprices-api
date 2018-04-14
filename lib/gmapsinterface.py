@@ -1,7 +1,6 @@
 import requests
-import os.path
+import os
 import json
-from lib.jsonfromfile import JsonFromFile, JsonFromFileError
 
 
 class GMapsInterfaceError(Exception):
@@ -42,18 +41,4 @@ class GMapsInterface:
         return outcode
 
     def get_api_key(self):
-        schema = {
-            "type": "object",
-            "gmapsApiKey": { "type": "string" },
-            "required": ["gmapsApiKey"]
-        }
-        path = os.path.join(os.path.dirname(__file__), "../config/")
-        json_data = JsonFromFile(path, schema)
-
-        try:
-            data = json_data.get_data("config")
-        except JsonFromFileError:
-            raise GMapsInterfaceError("No API key available")
-            return
-
-        return data["gmapsApiKey"]
+        return os.environ.get('GMAPS_API_KEY')

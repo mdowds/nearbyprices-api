@@ -103,8 +103,8 @@ class PricesDataSourceTests(unittest.TestCase):
     @classmethod
     def get_sample_data(cls, name):
         path = os.path.join(cls.PATH, "testdata/")
-        file = open(path + name + ".json")
-        return json.load(file)
+        with open(path + name + ".json") as file:
+            return json.load(file)
 
     @classmethod
     def mock_runquery(cls, query):

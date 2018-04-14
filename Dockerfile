@@ -12,10 +12,12 @@ ADD . /app
 
 EXPOSE 4000
 
+ENV GMAPS_API_KEY ""
+
 CMD [ "uwsgi", "--http-socket", "0.0.0.0:4000", \
                 "--uid", "uwsgi", \
                 "--manage-script-name", \
                 "--plugins", "python3", \
                 "--virtualenv",  "/app/venv", \
-                "--mount", "/=api:app", \
+                "--mount", "/nearbyhouseprices/api=api:app", \
                 "--master"]

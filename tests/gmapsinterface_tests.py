@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import patch
-import json
 import os.path
 from lib.gmapsinterface import GMapsInterface, GMapsInterfaceError
 
@@ -9,10 +8,12 @@ class GMapsInterfaceTests(unittest.TestCase):
 
     example_lat = 51.507386
     example_long = -0.127651
+    mock_key = "1234"
 
     path = os.path.dirname(__file__)
 
     def setUp(self):
+        os.environ["GMAPS_API_KEY"] = self.mock_key
         self.maps = GMapsInterface()
 
     @patch('lib.gmapsinterface.requests')
@@ -21,7 +22,7 @@ class GMapsInterfaceTests(unittest.TestCase):
         self.maps.get_outcode(self.example_lat, self.example_long)
 
         coords_str = str(self.example_lat) + "," + str(self.example_long)
-        expected_params = {"latlng": coords_str, "result_type": "postal_code", "key": self.get_api_key()}
+        expected_params = {"latlng": coords_str, "result_type": "postal_code", "key": self.mock_key}
 
         mock_requests.get.assert_called_once_with("https://maps.googleapis.com/maps/api/geocode/json", expected_params)
 
@@ -51,14 +52,8 @@ class GMapsInterfaceTests(unittest.TestCase):
 
     def get_sample_response(self, name):
         path = os.path.join(self.path, "testdata/")
-        file = open(path + name + ".json")
-        return file.read()
-
-    def get_api_key(self):
-        path = os.path.join(self.path, "../config/")
-        file = open(path + "config.json")
-        data = json.loads(file.read())
-        return data['gmapsApiKey']
+        with open(path + name + ".json") as file:
+            return file.read()
 
 
 if __name__ == '__main__':

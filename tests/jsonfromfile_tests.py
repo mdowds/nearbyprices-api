@@ -31,8 +31,8 @@ class JsonFromFileTests(unittest.TestCase):
         self.assertEqual(self.jsonData.schema, self.schema)
 
     def test_get_data_WithValidFilename_ReturnsCorrectData(self):
-        dataFile = open(self.root + "test.json").read()
-        expectedData = json.loads(dataFile)
+        with open(self.root + "test.json") as dataFile:
+            expectedData = json.loads(dataFile.read())
 
         actualData = self.jsonData.get_data("test")
 
