@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 import json
 import os.path
-from datasource.pricesdatasource import PricesDataSource, PricesDataSourceError, LandRegistryInterfaceError
+from update.datasource.pricesdatasource import PricesDataSource, PricesDataSourceError, LandRegistryInterfaceError
 
 
 class PricesDataSourceTests(unittest.TestCase):

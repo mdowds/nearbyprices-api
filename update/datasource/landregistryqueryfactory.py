@@ -1,4 +1,4 @@
-from datasource.landregistryquery import LandRegistryQuery
+from .landregistryquery import LandRegistryQuery
 
 
 class LandRegistryQueryFactory:

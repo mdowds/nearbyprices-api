@@ -1,6 +1,8 @@
 /tests
 /venv
 /.idea
+/update
+/data
 .travis.yml
 LICENSE
 README.md

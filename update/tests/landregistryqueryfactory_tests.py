@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from datasource.landregistryqueryfactory import LandRegistryQueryFactory
+from update.datasource import LandRegistryQueryFactory
 
 
 class LandRegistryQueryFactoryTests(unittest.TestCase):

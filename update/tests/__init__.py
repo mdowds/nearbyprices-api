@@ -1,0 +1,3 @@
+from .landregistryinterface_tests import LandRegistryInterfaceTests
+from .landregistryqueryfactory_tests import LandRegistryQueryFactoryTests
+from .pricesdatasource_tests import PricesDataSourceTests

@@ -1,7 +1,4 @@
 from .gmapsinterface_tests import GMapsInterfaceTests
 from .jsonfromfile_tests import JsonFromFileTests
-from .landregistryinterface_tests import LandRegistryInterfaceTests
-from .landregistryqueryfactory_tests import LandRegistryQueryFactoryTests
 from .position_tests import PositionTests
-from .pricesdatasource_tests import PricesDataSourceTests
 from .pricesfromoutcode_tests import PricesFromOutcodeTests

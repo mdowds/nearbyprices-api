@@ -1,5 +1,5 @@
-from datasource.landregistryinterface import LandRegistryInterface, LandRegistryInterfaceError
-from datasource.landregistryqueryfactory import LandRegistryQueryFactory
+from .landregistryinterface import LandRegistryInterface, LandRegistryInterfaceError
+from .landregistryqueryfactory import LandRegistryQueryFactory
 
 
 class PricesDataSource:
@@ -79,7 +79,6 @@ class PricesDataSource:
                 self.output[self.TERRACEDAVERAGE_KEY] = int(float(binding[self.AVERAGEPRICE_KEY][self.VALUE_KEY]))
             elif self.check_type(binding, "flat-maisonette"):
                 self.output[self.FLATAVERAGE_KEY] = int(float(binding[self.AVERAGEPRICE_KEY][self.VALUE_KEY]))
-
 
     def check_type(self, binding, propertyType):
         type_def_url = "http://landregistry.data.gov.uk/def/common/"

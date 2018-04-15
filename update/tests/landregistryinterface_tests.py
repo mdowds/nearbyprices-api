@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
-from datasource.landregistryinterface import LandRegistryInterface, LandRegistryInterfaceError
-from datasource.landregistryquery import LandRegistryQuery
+from update.datasource.landregistryinterface import LandRegistryInterface, LandRegistryInterfaceError
 
 
 class LandRegistryInterfaceTests(unittest.TestCase):

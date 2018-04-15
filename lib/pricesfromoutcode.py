@@ -1,6 +1,7 @@
 import os.path
 from lib.jsonfromfile import JsonFromFile, JsonFromFileError
 
+
 class PricesFromOutcode:
 
     schema = {
