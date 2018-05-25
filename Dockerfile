@@ -1,4 +1,4 @@
-FROM mdowds/uwsgi:python3.6.5
+FROM mdowds/uwsgi:python3.6.5-alpine
 
 RUN pip install virtualenv
 
