@@ -1,7 +1,7 @@
 aniso8601==1.2.0
 click==6.6
 Flask==0.11.1
-Flask-RESTful==0.3.5
+Flask-RESTful==0.3.6
 isodate==0.5.4
 itsdangerous==0.24
 Jinja2==2.8
