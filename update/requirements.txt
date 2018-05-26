@@ -1,4 +1,4 @@
-pyparsing==2.1.10
+pyparsing==2.2.0
 python-dateutil==2.7.3
 rdflib==4.2.2
 six==1.10.0
