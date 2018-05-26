@@ -10,7 +10,7 @@ MarkupSafe==1.0
 marshmallow==2.15.3
 python-dateutil==2.6.0
 pytz==2018.4
-requests==2.12.3
+requests==2.18.4
 six==1.10.0
 webargs==3.0.0
 Werkzeug==0.14.1
