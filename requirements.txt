@@ -2,7 +2,7 @@ aniso8601==1.2.0
 click==6.6
 Flask==1.0.2
 Flask-RESTful==0.3.6
-isodate==0.5.4
+isodate==0.6.0
 itsdangerous==0.24
 Jinja2==2.8
 jsonschema==2.6.0
