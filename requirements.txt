@@ -6,7 +6,7 @@ isodate==0.5.4
 itsdangerous==0.24
 Jinja2==2.8
 jsonschema==2.6.0
-MarkupSafe==0.23
+MarkupSafe==1.0
 marshmallow==2.15.3
 python-dateutil==2.6.0
 pytz==2018.4
