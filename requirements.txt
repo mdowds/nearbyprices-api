@@ -1,5 +1,5 @@
 aniso8601==1.2.0
-click==6.6
+click==6.7
 Flask==1.0.2
 Flask-RESTful==0.3.6
 isodate==0.6.0
