@@ -1,4 +1,4 @@
-aniso8601==1.2.0
+aniso8601==3.0.0
 click==6.7
 Flask==1.0.2
 Flask-RESTful==0.3.6
