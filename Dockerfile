@@ -1,4 +1,4 @@
-FROM mdowds/uwsgi:python3.6.5-alpine
+FROM mdowds/uwsgi:python3.6.5
 
 RUN pip install virtualenv
 
@@ -6,7 +6,7 @@ WORKDIR /app
 RUN virtualenv venv
 
 ADD ./requirements.txt /app/requirements.txt
-RUN source venv/bin/activate && pip install -r requirements.txt
+RUN . venv/bin/activate && pip install -r requirements.txt
 
 ADD . /app
 
@@ -17,7 +17,6 @@ ENV GMAPS_API_KEY ""
 CMD [ "uwsgi", "--http-socket", "0.0.0.0:4000", \
                 "--uid", "uwsgi", \
                 "--manage-script-name", \
-                "--plugins", "python3", \
                 "--virtualenv",  "/app/venv", \
                 "--mount", "/nearbyhouseprices/api=api:app", \
                 "--master"]
