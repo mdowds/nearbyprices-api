@@ -1,5 +1,8 @@
+node_modules/
+*key.json
 .idea/
-venv/
-__pycache__/
-*.pyc
-data/
+
+*.js
+*.js.map
+!test/*.js
+.env

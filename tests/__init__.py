@@ -1,4 +1,0 @@
-from .gmapsinterface_tests import GMapsInterfaceTests
-from .jsonfromfile_tests import JsonFromFileTests
-from .position_tests import PositionTests
-from .pricesfromoutcode_tests import PricesFromOutcodeTests

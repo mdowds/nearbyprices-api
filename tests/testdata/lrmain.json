@@ -1,1 +1,0 @@
-{"results": {"bindings": [{"averagePrice": {"datatype": "http://www.w3.org/2001/XMLSchema#decimal", "type": "typed-literal", "value": "500000.1"}, "town": {"value": "LONDON", "type": "literal"}, "transactionCount": {"datatype": "http://www.w3.org/2001/XMLSchema#integer", "type": "typed-literal", "value": "1000"}}]}, "head": {"vars": ["averagePrice", "transactionCount", "town"]}}
