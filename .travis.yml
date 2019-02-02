@@ -1,7 +1,11 @@
-language: python
-python:
-  - 3.6
-install:
-  - pip install -r requirements.txt
-script: python -m unittest discover tests -p "*tests.py"
-after_success: coveralls
+language: node_js
+node_js: 10
+
+before_script:
+- chmod +x test-ci.sh
+- yarn build
+- openssl aes-256-cbc -K $encrypted_e5776bea95d0_key -iv $encrypted_e5776bea95d0_iv -in ci-key.json.enc -out ci-key.json -d
+- cd test && yarn install
+- cd ..
+
+script: yarn run test:ci
