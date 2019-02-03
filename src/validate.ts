@@ -4,7 +4,6 @@ const MAXIMUM_LONGITUDE = 1.78;
 const MINIMUM_LONGITUDE = -8.45;
 
 export function validateLatitude(lat) {
-    console.log(lat, lat > MAXIMUM_LATITUDE, lat < MINIMUM_LATITUDE);
     if (lat > MAXIMUM_LATITUDE || lat < MINIMUM_LATITUDE || isNaN(lat)) {
         throw new Error('Latitude is not valid. It must be within the UK.')
     } else {

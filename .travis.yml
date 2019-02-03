@@ -9,3 +9,10 @@ before_script:
 - cd test && yarn install
 - cd ..
 script: yarn run test:ci
+deploy:
+  provider: heroku
+  api_key:
+    secure: cMwTBYK534SqAdWv7P9L2UPH2a+z0JVzf7PCsYbuuwsgyXZoJWJfeMmnFU87uAYDQkDGM99wkYPe9Mzm+B36QBkA2Hu8aOctypk6c6cZTkr7TWActSS8wi6EIRQlJaAehSu5MWqzDJNkbZMQofz0v3rdc6RIGpj4eIBg61TOnwZw3/0Jgtu1a88EfPDAzmMZJ1qldCP2XlKARn4BfhXPvFA9QwUoRPTfK40Izy4TjsvBBEHuy6vWN6V2QanjrlfxJdnSYD3xxBVKI99bfFTQ4Ai85zPM1XBgWhj9Zvr84jhTOCGJRBc2tQnCC2xAgiyqyrHihWCn1BLbYjSxTL369SH8C6rbiN8TBJ/c/OXBEUZPYd90dYmReN10KZQkjUQpT2AbeUxXDt4ZxRWwNq9iaRLmzogbslVVM3/pB7U2dg1fe3i+GWeTT3BZtsJ7dlGeMmF8KoWl+Jd7SzwFFnKdwc0F0ob8oV8/dUrn4Nci8jZb7NmZ+RM47e93mnt5wvlFYGA6dTfgUwyKbY8dqwbUx2+oRLzVe3/SlgV7fo/BSGale8H5u8ivmFAtCszkuarcUkp6eNlAXZhvbVBLiJ2FDpw6rumSeHa6BSx1Ilx0e0KELPS2ovf2oUliVhwXx5Y5G3dqI/diYSzR2JE1b2TcUSVshJcpkEn4FQswX4AV3hY=
+  app: nearbyhouseprices-api
+  on:
+    repo: mdowds/nearby-house-prices-api
