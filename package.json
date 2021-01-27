@@ -4,7 +4,7 @@
   "main": "server.ts",
   "license": "MIT",
   "dependencies": {
-    "@google-cloud/firestore": "^2.0.0",
+    "@google-cloud/firestore": "^4.9.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^5.3.1",
